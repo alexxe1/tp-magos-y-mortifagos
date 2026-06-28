@@ -8,6 +8,7 @@ import hechizos.Protego;
 import hechizos.TipoHechizo;
 
 public class Hechiceria {
+	public static Hechizo crearHechizo(TipoHechizo tipo) {
 		switch (tipo) {
 			case EXPELLIARMUS:
 				return new Expelliarmus();
