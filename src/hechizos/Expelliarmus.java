@@ -10,6 +10,11 @@ public class Expelliarmus extends HechizoBase {
 
 	@Override
 	public int getPotenciaBase() {
-		return 15;
+		return 35;
+	}
+	
+	@Override
+	public boolean esOfensivo() {
+		return true;
 	}
 }

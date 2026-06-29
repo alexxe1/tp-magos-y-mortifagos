@@ -12,4 +12,9 @@ public class AvadaKedavra extends HechizoBase {
 	public int getPotenciaBase() {
 		return 45;
 	}
+
+	@Override
+	public boolean esOfensivo() {
+		return true;
+	}
 }

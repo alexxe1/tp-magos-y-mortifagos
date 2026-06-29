@@ -8,6 +8,11 @@ public class Profesor extends Mago {
     public Profesor(String nombre, int nivelDeMagia, int puntosDeVida, List<Hechizo> hechizosParaLanzar) {
         super(nombre, nivelDeMagia, puntosDeVida, hechizosParaLanzar);
     }
+    
+    @Override
+    public int calcularDaño(Hechizo hechizo) {
+    	return super.calcularDaño(hechizo) + 5;
+    }
 
     @Override
     public int calcularCuracion(Hechizo hechizo) {

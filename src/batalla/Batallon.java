@@ -25,7 +25,7 @@ public class Batallon {
 		historialHechizos.put(personaje, new ArrayList<>());
 	}
 
-	public boolean tienePersonajesSaludable() {
+	public boolean tienePersonajesSaludables() {
 		for (Personaje personaje : personajes) {
 			if (personaje.getPuntosDeVida() > 0) {
 				return true;
@@ -35,29 +35,43 @@ public class Batallon {
 		return false;
 	}
 
-	public void atacar(Batallon batallon) {
-		Set<Hechizo> hechizosUsadosEnTurno = new HashSet<>();
+	public void atacar(Batallon batallonEnemigo) {
+	    Set<Hechizo> hechizosUsadosEnTurno = new HashSet<>();
 
-		for (Personaje personaje : personajes) {
-			if (personaje.getPuntosDeVida() > 0 && batallon.tienePersonajesSaludable()) {
-				Hechizo hechizo = elegirHechizoNoRepetido(personaje, hechizosUsadosEnTurno);
+	    for (Personaje personaje : personajes) {
+	    	
+	    	if (personaje.getPuntosDeVida() <= 0) continue;
+	    	if (!batallonEnemigo.tienePersonajesSaludables()) continue;
+	    	
+	    	Hechizo hechizo = elegirHechizoNoRepetido(personaje, hechizosUsadosEnTurno);
 
-				Personaje objetivo = batallon.elegirObjetivo();
-				
-				if (hechizo != null) {
-				    hechizo.ejecutar(personaje, objetivo);
-				    hechizosUsadosEnTurno.add(hechizo);
-				    historialHechizos.get(personaje).add(hechizo);
-				} else {
-					// Si da null es porque no quedan hechizos sin repetir y ataca sin hechizo
-				    personaje.atacarSinHechizo(objetivo);
-				}
-			}
-		}
+            if (hechizo != null) {
+            	
+                Personaje objetivo = hechizo.esOfensivo()
+                    ? batallonEnemigo.elegirObjetivo()
+                    : this.elegirObjetivo();
+
+                hechizo.ejecutar(personaje, objetivo);
+                hechizosUsadosEnTurno.add(hechizo);
+                historialHechizos.get(personaje).add(hechizo);
+                
+                System.out.println("  " + personaje.getNombre() + " lanza " + hechizo.getClass().getSimpleName() + " sobre " + objetivo.getNombre());
+            } else {
+                Personaje objetivo = batallonEnemigo.elegirObjetivo();
+                
+                personaje.atacarSinHechizo(objetivo);
+                
+                System.out.println("  " + personaje.getNombre() + " ataca sin hechizo a " + objetivo.getNombre());
+            }
+	    }
 	}
 
 	public Map<Personaje, List<Hechizo>> getHistorialHechizos() {
 		return historialHechizos;
+	}
+	
+	public List<Personaje> getPersonajes() {
+	    return personajes;
 	}
 
 	public void limpiarEstadoRonda() {

@@ -12,4 +12,9 @@ public class Protego extends HechizoBase {
 	public int getPotenciaBase() {
 		return 0;
 	}
+	
+	@Override
+	public boolean esOfensivo() {
+		return false;
+	}
 }
