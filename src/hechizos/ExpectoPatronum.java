@@ -12,4 +12,9 @@ public class ExpectoPatronum extends HechizoBase {
 	public int getPotenciaBase() {
 		return 20;
 	}
+	
+	@Override
+	public boolean esOfensivo() {
+		return false;
+	}
 }

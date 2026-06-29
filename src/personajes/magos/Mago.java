@@ -12,7 +12,7 @@ public abstract class Mago extends Personaje {
 
     @Override
     public int calcularDaño(Hechizo hechizo) {
-        return hechizo.getPotenciaBase() + getNivelDeMagia();
+        return hechizo.getPotenciaBase() + getNivelDeMagia() + 3;
     }
 
     @Override
