@@ -2,7 +2,7 @@ package hechizos;
 
 import personajes.Personaje;
 
-public class ExpectoPatronum implements Hechizo {
+public class ExpectoPatronum extends HechizoBase {
 	@Override
 	public void ejecutar(Personaje lanzador, Personaje objetivo) {
 		lanzador.curar(lanzador.calcularCuracion(this));

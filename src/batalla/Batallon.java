@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 
 import hechizos.Hechizo;
@@ -41,11 +42,15 @@ public class Batallon {
 			if (personaje.getPuntosDeVida() > 0 && batallon.tienePersonajesSaludable()) {
 				Hechizo hechizo = elegirHechizoNoRepetido(personaje, hechizosUsadosEnTurno);
 
+				Personaje objetivo = batallon.elegirObjetivo();
+				
 				if (hechizo != null) {
-					Personaje objetivo = batallon.elegirObjetivo();
-					hechizo.ejecutar(personaje, objetivo);
-					hechizosUsadosEnTurno.add(hechizo);
-					historialHechizos.get(personaje).add(hechizo);
+				    hechizo.ejecutar(personaje, objetivo);
+				    hechizosUsadosEnTurno.add(hechizo);
+				    historialHechizos.get(personaje).add(hechizo);
+				} else {
+					// Si da null es porque no quedan hechizos sin repetir y ataca sin hechizo
+				    personaje.atacarSinHechizo(objetivo);
 				}
 			}
 		}
@@ -62,29 +67,26 @@ public class Batallon {
 	}
 
 	private Hechizo elegirHechizoNoRepetido(Personaje personaje, Set<Hechizo> hechizosUsadosEnTurno) {
-		for (int intento = 0; intento < 10; intento++) {
-			try {
-				Hechizo hechizo = personaje.elegirHechizo();
-
-				if (!hechizosUsadosEnTurno.contains(hechizo)) {
-					return hechizo;
-				}
-			} catch (Exception e) {
-				return null;
-			}
-		}
-
-		return null;
+	    List<Hechizo> disponibles = new ArrayList<>(personaje.getHechizosParaLanzar());
+	    
+	    disponibles.removeAll(hechizosUsadosEnTurno);
+	    
+	    if (disponibles.isEmpty()) return null;
+	    
+	    return disponibles.get(new Random().nextInt(disponibles.size()));
 	}
 
 	private Personaje elegirObjetivo() {
-		for (Personaje personaje : personajes) {
-			if (personaje.getPuntosDeVida() > 0) {
-				return personaje;
-			}
-		}
-
-		return null;
+	    List<Personaje> vivos = new ArrayList<>();
+	    
+	    for (Personaje personaje : personajes) {
+	        if (personaje.getPuntosDeVida() > 0) {
+	            vivos.add(personaje);
+	        }
+	    }
+	    
+	    if (vivos.isEmpty()) return null;
+	    
+	    return vivos.get(new Random().nextInt(vivos.size()));
 	}
-
 }

@@ -34,10 +34,6 @@ public abstract class Personaje {
 		return nivelDeMagia;
 	}
 
-	public int getNivelMagia() {
-		return nivelDeMagia;
-	}
-	
 	public void herir(int puntosDeDaño) {
 		
 		// No puede ser atacado si está protegido
@@ -65,7 +61,7 @@ public abstract class Personaje {
 		estaProtegido = valor;
 	}
 	
-	public Hechizo elegirHechizo() throws Exception {
+	public Hechizo elegirHechizo() {
 		return elegirHechizoAleatorio();
 	}
 
@@ -76,6 +72,16 @@ public abstract class Personaje {
 		int indiceRandom = random.nextInt(hechizosParaLanzar.size());
 		
 		return hechizosParaLanzar.get(indiceRandom);
+	}
+	
+	public List<Hechizo> getHechizosParaLanzar() {
+	    return hechizosParaLanzar;
+	}
+	
+	// Esta función sirve para cuando un batallón ya usó todos los hechizos y los personajes no tienen más
+	// hechizos disponibles sin repetir
+	public void atacarSinHechizo(Personaje objetivo) {
+	    objetivo.herir(nivelDeMagia);
 	}
 	
 	// Esta función se llama cada vez que termina una ronda y debe reiniciar valores temporales

@@ -2,7 +2,7 @@ package hechizos;
 
 import personajes.Personaje;
 
-public class Protego implements Hechizo {
+public class Protego extends HechizoBase {
 	@Override
 	public void ejecutar(Personaje lanzador, Personaje objetivo) {
 		lanzador.setEstaProtegido(true);
