@@ -2,7 +2,7 @@ package hechizos;
 
 import personajes.Personaje;
 
-public class AvadaKedavra implements Hechizo {
+public class AvadaKedavra extends HechizoBase {
 	@Override
 	public void ejecutar(Personaje lanzador, Personaje objetivo) {
 		objetivo.herir(lanzador.calcularDaño(this));
