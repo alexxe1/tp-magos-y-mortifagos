@@ -12,13 +12,8 @@ import hechizos.Hechizo;
 import personajes.Personaje;
 
 public class Batallon {
-	private List<Personaje> personajes;
-	private Map<Personaje, List<Hechizo>> historialHechizos;
-
-	public Batallon() {
-		personajes = new ArrayList<>();
-		historialHechizos = new HashMap<>();
-	}
+	private List<Personaje> personajes = new ArrayList<>();
+	private Map<Personaje, List<Hechizo>> historialHechizos = new HashMap<>();
 
 	public void agregarPersonaje(Personaje personaje) {
 		personajes.add(personaje);
