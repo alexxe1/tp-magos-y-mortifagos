@@ -10,11 +10,13 @@ import hechizos.Hechizo;
 import personajes.Personaje;
 
 public class Juego {
+	private static final int CANTIDAD_PERSONAJES_POR_BATALLON = 3;
+	private static final int RONDA_INICIAL = 1;
 	
 	private Batallon batallonMagos = new Batallon();
 	private Batallon batallonMortifagos = new Batallon();
     private Random rand = new Random();
-    private int ronda = 1;
+    private int ronda = RONDA_INICIAL;
     
 	public void iniciarJuego() {
 		
@@ -37,7 +39,7 @@ public class Juego {
 	
 	private void crearBatallones() {
 		
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < CANTIDAD_PERSONAJES_POR_BATALLON; i++) {
             batallonMagos.agregarPersonaje(Reclutador.crearMago());
             batallonMortifagos.agregarPersonaje(Reclutador.crearMortifago());
         }
@@ -117,7 +119,7 @@ public class Juego {
 
     private static void mostrarEstado(Batallon batallon) {
         for (Personaje p : batallon.getPersonajes()) {
-            String estado = p.getPuntosDeVida() > 0 ? "❤️  " + p.getPuntosDeVida() + " PV" : "💀 Eliminado";
+            String estado = p.estaVivo() ? "❤️  " + p.getPuntosDeVida() + " PV" : "💀 Eliminado";
             System.out.println("    - " + p.getNombre() + ": " + estado);
         }
     }

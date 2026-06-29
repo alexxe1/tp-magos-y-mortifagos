@@ -16,6 +16,24 @@ import personajes.mortifagos.Mortifago;
 import personajes.mortifagos.Seguidor;
 
 public class Reclutador {
+	private static final int OPCION_AUROR = 0;
+	private static final int OPCION_PROFESOR = 1;
+	private static final int OPCION_ESTUDIANTE = 2;
+	private static final int OPCION_COMANDANTE = 0;
+	private static final int OPCION_SEGUIDOR = 1;
+	private static final int CANTIDAD_TIPOS_MAGO = 3;
+	private static final int CANTIDAD_TIPOS_MORTIFAGO = 2;
+	private static final int NIVEL_MAGIA_AUROR = 8;
+	private static final int PUNTOS_VIDA_AUROR = 120;
+	private static final int NIVEL_MAGIA_PROFESOR = 10;
+	private static final int PUNTOS_VIDA_PROFESOR = 110;
+	private static final int NIVEL_MAGIA_ESTUDIANTE = 4;
+	private static final int PUNTOS_VIDA_ESTUDIANTE = 85;
+	private static final int NIVEL_MAGIA_COMANDANTE = 10;
+	private static final int PUNTOS_VIDA_COMANDANTE = 120;
+	private static final int NIVEL_MAGIA_SEGUIDOR = 5;
+	private static final int PUNTOS_VIDA_SEGUIDOR = 75;
+	
 	private static Random random = new Random();
 	
 	private static List<String> nombresAuror = new ArrayList<>(Arrays.asList("Kingsley", "Tonks", "Moody", "Dawlish", "Proudfoot"));
@@ -25,22 +43,26 @@ public class Reclutador {
 	private static List<String> nombresSeguidor = new ArrayList<>(Arrays.asList("Crabbe", "Goyle", "Pettigrew", "Avery", "Rookwood"));
 	
     public static Mago crearMago() {
-        switch (random.nextInt(3)) { 
-            case 0:
-            	return new Auror(elegirNombre(nombresAuror, "Auror"), 8, 120, hechizosDeMago());
-            case 1:
-            	return new Profesor(elegirNombre(nombresProfesor, "Profesor"), 10, 110, hechizosDeMago());
+        switch (random.nextInt(CANTIDAD_TIPOS_MAGO)) { 
+            case OPCION_AUROR:
+            	return new Auror(elegirNombre(nombresAuror, "Auror"), NIVEL_MAGIA_AUROR, PUNTOS_VIDA_AUROR, hechizosDeMago());
+            case OPCION_PROFESOR:
+            	return new Profesor(elegirNombre(nombresProfesor, "Profesor"), NIVEL_MAGIA_PROFESOR, PUNTOS_VIDA_PROFESOR, hechizosDeMago());
+            case OPCION_ESTUDIANTE:
+            	return new Estudiante(elegirNombre(nombresEstudiante, "Estudiante"), NIVEL_MAGIA_ESTUDIANTE, PUNTOS_VIDA_ESTUDIANTE, hechizosDeMago());
             default:
-            	return new Estudiante(elegirNombre(nombresEstudiante, "Estudiante"), 4, 85, hechizosDeMago());
+            	throw new IllegalStateException("Opción de mago inválida");
         }
     }
 
     public static Mortifago crearMortifago() {
-        switch (random.nextInt(2)) {
-            case 0:
-            	return new Comandante(elegirNombre(nombresComandante, "Comandante"), 10, 120, hechizosDeMortifago());
+        switch (random.nextInt(CANTIDAD_TIPOS_MORTIFAGO)) {
+            case OPCION_COMANDANTE:
+            	return new Comandante(elegirNombre(nombresComandante, "Comandante"), NIVEL_MAGIA_COMANDANTE, PUNTOS_VIDA_COMANDANTE, hechizosDeMortifago());
+            case OPCION_SEGUIDOR:
+            	return new Seguidor(elegirNombre(nombresSeguidor, "Seguidor"), NIVEL_MAGIA_SEGUIDOR, PUNTOS_VIDA_SEGUIDOR, hechizosDeMortifago());
             default:
-            	return new Seguidor(elegirNombre(nombresSeguidor, "Seguidor"), 5, 75, hechizosDeMortifago());
+            	throw new IllegalStateException("Opción de mortífago inválida");
         }
     }
 

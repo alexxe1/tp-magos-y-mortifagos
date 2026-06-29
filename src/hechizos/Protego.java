@@ -3,6 +3,8 @@ package hechizos;
 import personajes.Personaje;
 
 public class Protego extends HechizoBase {
+	private static final int POTENCIA_BASE = 0;
+	
 	@Override
 	public void ejecutar(Personaje lanzador, Personaje objetivo) {
 		lanzador.setEstaProtegido(true);
@@ -10,7 +12,7 @@ public class Protego extends HechizoBase {
 
 	@Override
 	public int getPotenciaBase() {
-		return 0;
+		return POTENCIA_BASE;
 	}
 	
 	@Override

@@ -6,13 +6,15 @@ import hechizos.Hechizo;
 import personajes.Personaje;
 
 public abstract class Mortifago extends Personaje {
+	private static final int BONIFICACION_DANIO_MORTIFAGO = 5;
+	
 	protected Mortifago(String nombre, int nivelDeMagia, int puntosDeVida, List<Hechizo> hechizosParaLanzar) {
 		super(nombre, nivelDeMagia, puntosDeVida, hechizosParaLanzar);
 	}
 
 	@Override
 	public int calcularDaño(Hechizo hechizo) {
-		return aplicarObjetosAlDaño(hechizo, hechizo.getPotenciaBase() + getNivelDeMagia() + 5);
+		return aplicarObjetosAlDaño(hechizo, hechizo.getPotenciaBase() + getNivelDeMagia() + BONIFICACION_DANIO_MORTIFAGO);
 	}
 
 	@Override

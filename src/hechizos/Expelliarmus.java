@@ -3,6 +3,8 @@ package hechizos;
 import personajes.Personaje;
 
 public class Expelliarmus extends HechizoBase {
+	private static final int POTENCIA_BASE = 35;
+	
 	@Override
 	public void ejecutar(Personaje lanzador, Personaje objetivo) {
 		objetivo.herir(lanzador.calcularDaño(this));
@@ -10,7 +12,7 @@ public class Expelliarmus extends HechizoBase {
 
 	@Override
 	public int getPotenciaBase() {
-		return 35;
+		return POTENCIA_BASE;
 	}
 	
 	@Override

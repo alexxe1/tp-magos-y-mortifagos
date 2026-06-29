@@ -27,7 +27,7 @@ public class Batallon {
 
 	public boolean tienePersonajesSaludables() {
 		for (Personaje personaje : personajes) {
-			if (personaje.getPuntosDeVida() > 0) {
+			if (personaje.estaVivo()) {
 				return true;
 			}
 		}
@@ -40,7 +40,7 @@ public class Batallon {
 
 	    for (Personaje personaje : personajes) {
 	    	
-	    	if (personaje.getPuntosDeVida() <= 0) continue;
+	    	if (!personaje.estaVivo()) continue;
 	    	if (!batallonEnemigo.tienePersonajesSaludables()) continue;
 	    	
 	    	Hechizo hechizo = elegirHechizoNoRepetido(personaje, hechizosUsadosEnTurno);
@@ -94,7 +94,7 @@ public class Batallon {
 	    List<Personaje> vivos = new ArrayList<>();
 	    
 	    for (Personaje personaje : personajes) {
-	        if (personaje.getPuntosDeVida() > 0) {
+	        if (personaje.estaVivo()) {
 	            vivos.add(personaje);
 	        }
 	    }
