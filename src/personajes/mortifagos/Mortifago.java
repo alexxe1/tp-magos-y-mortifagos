@@ -12,11 +12,11 @@ public abstract class Mortifago extends Personaje {
 
 	@Override
 	public int calcularDaño(Hechizo hechizo) {
-		return hechizo.getPotenciaBase() + getNivelDeMagia() + 5;
+		return aplicarObjetosAlDaño(hechizo, hechizo.getPotenciaBase() + getNivelDeMagia() + 5);
 	}
 
 	@Override
 	public int calcularCuracion(Hechizo hechizo) {
-		return hechizo.getPotenciaBase() + getNivelDeMagia();
+		return aplicarObjetosALaCuracion(hechizo.getPotenciaBase() + getNivelDeMagia());
 	}
 }
