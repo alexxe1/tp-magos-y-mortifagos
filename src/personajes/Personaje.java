@@ -8,6 +8,8 @@ import hechizos.Hechizo;
 import objetos.ObjetoMagico;
 
 public abstract class Personaje {
+	private static final int PUNTOS_DE_VIDA_MINIMOS = 0;
+	
 	private String nombre;
 	private int nivelDeMagia;
 	private int puntosDeVida;
@@ -46,8 +48,8 @@ public abstract class Personaje {
 		
 		puntosDeVida -= puntosDeDaño;
 		
-		if (puntosDeVida < 0) {
-			puntosDeVida = 0;
+		if (puntosDeVida < PUNTOS_DE_VIDA_MINIMOS) {
+			puntosDeVida = PUNTOS_DE_VIDA_MINIMOS;
 		}
 	}
 	
@@ -111,6 +113,10 @@ public abstract class Personaje {
 		}
 
 		return curacionFinal;
+	}
+	
+	public boolean estaVivo() {
+		return puntosDeVida > PUNTOS_DE_VIDA_MINIMOS;
 	}
 	
 	// Esta función sirve para cuando un batallón ya usó todos los hechizos y los personajes no tienen más

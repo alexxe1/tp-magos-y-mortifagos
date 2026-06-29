@@ -3,6 +3,8 @@ package hechizos;
 import personajes.Personaje;
 
 public class ExpectoPatronum extends HechizoBase {
+	private static final int POTENCIA_BASE = 20;
+	
 	@Override
 	public void ejecutar(Personaje lanzador, Personaje objetivo) {
 		lanzador.curar(lanzador.calcularCuracion(this));
@@ -10,7 +12,7 @@ public class ExpectoPatronum extends HechizoBase {
 
 	@Override
 	public int getPotenciaBase() {
-		return 20;
+		return POTENCIA_BASE;
 	}
 	
 	@Override
