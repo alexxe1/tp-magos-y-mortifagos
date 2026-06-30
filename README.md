@@ -30,7 +30,7 @@ Este es el diagrama de clases FINAL
 
 | Patrón | Dónde se aplica |
 |--------|----------------|
-| **Factory** | `Reclutador` centraliza la creación de personajes. `Hechiceria` centraliza la creación de hechizos a partir de `TipoHechizo`. |
+| **Factory** | `Reclutador` centraliza la creación de personajes. `Hechiceria` centraliza la creación de hechizos a partir de `TipoHechizo`. `TiendaDeObjetos` centraliza la creación de objetos. |
 | **Strategy** | `Hechizo` es una interfaz con distintas implementaciones intercambiables (`Expelliarmus`, `AvadaKedavra`, `Protego`, `ExpectoPatronum`). |
 | **Template Method** | `calcularDaño` y `calcularCuracion` son abstractos en `Personaje` e implementados de forma distinta en `Mago` y `Mortifago`, sin que el hechizo conozca el tipo del lanzador. |
 
