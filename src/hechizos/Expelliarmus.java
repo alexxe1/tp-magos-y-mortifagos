@@ -19,4 +19,9 @@ public class Expelliarmus extends HechizoBase {
 	public boolean esOfensivo() {
 		return true;
 	}
+
+	@Override
+	public boolean esOscuro() {
+		return false;
+	}
 }

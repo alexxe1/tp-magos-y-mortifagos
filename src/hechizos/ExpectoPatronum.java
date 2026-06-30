@@ -19,4 +19,9 @@ public class ExpectoPatronum extends HechizoBase {
 	public boolean esOfensivo() {
 		return false;
 	}
+
+	@Override
+	public boolean esOscuro() {
+		return false;
+	}
 }

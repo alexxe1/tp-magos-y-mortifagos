@@ -11,6 +11,7 @@ import hechizos.ExpectoPatronum;
 import hechizos.Expelliarmus;
 import hechizos.Protego;
 import personajes.magos.Auror;
+import personajes.magos.Estudiante;
 import personajes.magos.Profesor;
 import personajes.mortifagos.Comandante;
 import personajes.mortifagos.Seguidor;
@@ -81,6 +82,38 @@ public class HechizosTest {
 
 		// Assert: la curacion no supera los puntos de vida maximos del personaje.
 		assertEquals(110, profesor.getPuntosDeVida());
+
+		// Anihilate: no hay recursos externos que liberar.
+	}
+
+	@Test
+	public void expectoPatronumAplicaLaMejorCuracionGeneralDeLosMagos() {
+		// Arrange: se prepara un estudiante herido para validar el bonus base de los magos.
+		ExpectoPatronum expectoPatronum = new ExpectoPatronum();
+		Estudiante estudiante = new Estudiante("Hermione", 4, 85, List.of(expectoPatronum));
+		estudiante.herir(50);
+
+		// Act: el estudiante lanza Expecto Patronum sobre si mismo.
+		expectoPatronum.ejecutar(estudiante, estudiante);
+
+		// Assert: la curacion incluye el bonus general de los magos, no solo el de profesor.
+		assertEquals(74, estudiante.getPuntosDeVida());
+
+		// Anihilate: no hay recursos externos que liberar.
+	}
+
+	@Test
+	public void mortifagoNoAumentaDanioCuandoElHechizoNoEsOscuro() {
+		// Arrange: se prepara un seguidor con un hechizo ofensivo no oscuro.
+		Expelliarmus expelliarmus = new Expelliarmus();
+		Seguidor seguidor = new Seguidor("Yaxley", 6, 100, List.of(expelliarmus));
+		Estudiante objetivo = new Estudiante("Dean", 1, 100, List.of(expelliarmus));
+
+		// Act: el seguidor lanza Expelliarmus sobre el objetivo.
+		expelliarmus.ejecutar(seguidor, objetivo);
+
+		// Assert: el danio no suma la letalidad propia de los hechizos oscuros.
+		assertEquals(59, objetivo.getPuntosDeVida());
 
 		// Anihilate: no hay recursos externos que liberar.
 	}

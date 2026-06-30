@@ -1,6 +1,7 @@
 package batalla;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -62,11 +63,17 @@ public class Batallon {
 	}
 
 	public Map<Personaje, List<Hechizo>> getHistorialHechizos() {
-		return historialHechizos;
+		Map<Personaje, List<Hechizo>> historialDefensivo = new HashMap<>();
+		
+		for (Map.Entry<Personaje, List<Hechizo>> entrada : historialHechizos.entrySet()) {
+			historialDefensivo.put(entrada.getKey(), Collections.unmodifiableList(entrada.getValue()));
+		}
+		
+		return Collections.unmodifiableMap(historialDefensivo);
 	}
 	
 	public List<Personaje> getPersonajes() {
-	    return personajes;
+	    return Collections.unmodifiableList(personajes);
 	}
 
 	public void limpiarEstadoRonda() {

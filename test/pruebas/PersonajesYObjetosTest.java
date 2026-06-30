@@ -2,6 +2,7 @@ package pruebas;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
@@ -84,6 +85,43 @@ public class PersonajesYObjetosTest {
 		// Assert: la curacion incluye el bonus del profesor y el bonus del amuleto.
 		assertEquals(105, profesor.getPuntosDeVida());
 		assertTrue(profesor.estaVivo());
+
+		// Anihilate: no hay recursos externos que liberar.
+	}
+
+	@Test
+	public void quitarObjetoHaceQueDejeDeModificarElComportamientoDelPersonaje() {
+		// Arrange: se prepara un auror que primero usa una varita y luego se la quita.
+		Expelliarmus expelliarmus = new Expelliarmus();
+		Auror auror = new Auror("Moody", 8, 120, List.of(expelliarmus));
+		Seguidor objetivo = new Seguidor("Rookwood", 1, 200, List.of(expelliarmus));
+		VaritaPotenciadora varita = new VaritaPotenciadora();
+		auror.equiparObjeto(varita);
+
+		// Act: se ejecuta un ataque con la varita y otro luego de quitarla.
+		expelliarmus.ejecutar(auror, objetivo);
+		auror.quitarObjeto(varita);
+		expelliarmus.ejecutar(auror, objetivo);
+
+		// Assert: el segundo ataque ya no aplica los 10 puntos extra de la varita.
+		assertEquals(78, objetivo.getPuntosDeVida());
+
+		// Anihilate: no hay recursos externos que liberar.
+	}
+
+	@Test
+	public void gettersDePersonajeNoPermitenMutarSuEstadoInterno() {
+		// Arrange: se prepara un estudiante con hechizo y objeto equipado.
+		Expelliarmus expelliarmus = new Expelliarmus();
+		Estudiante estudiante = new Estudiante("Ginny", 4, 85, List.of(expelliarmus));
+		VaritaPotenciadora varita = new VaritaPotenciadora();
+		estudiante.equiparObjeto(varita);
+
+		// Act y Assert: las listas expuestas no aceptan modificaciones externas.
+		assertThrows(UnsupportedOperationException.class, () -> estudiante.getHechizosParaLanzar().clear());
+		assertThrows(UnsupportedOperationException.class, () -> estudiante.getObjetosMagicos().clear());
+		assertEquals(1, estudiante.getHechizosParaLanzar().size());
+		assertEquals(1, estudiante.getObjetosMagicos().size());
 
 		// Anihilate: no hay recursos externos que liberar.
 	}
