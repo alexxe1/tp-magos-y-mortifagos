@@ -7,6 +7,7 @@ import personajes.Personaje;
 
 public abstract class Mago extends Personaje {
     private static final int BONIFICACION_DANIO_MAGO = 3;
+    private static final int BONIFICACION_CURACION_MAGO = 15;
     
     protected Mago(String nombre, int nivelDeMagia, int puntosDeVida, List<Hechizo> hechizosParaLanzar) {
         super(nombre, nivelDeMagia, puntosDeVida, hechizosParaLanzar);
@@ -19,6 +20,6 @@ public abstract class Mago extends Personaje {
 
     @Override
     public int calcularCuracion(Hechizo hechizo) {
-        return aplicarObjetosALaCuracion(hechizo.getPotenciaBase() + getNivelDeMagia());
+        return aplicarObjetosALaCuracion(hechizo.getPotenciaBase() + getNivelDeMagia() + BONIFICACION_CURACION_MAGO);
     }
 }

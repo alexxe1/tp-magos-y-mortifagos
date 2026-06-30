@@ -8,4 +8,6 @@ public interface Hechizo {
 	public int getPotenciaBase();
 	
 	boolean esOfensivo();
+
+	boolean esOscuro();
 }

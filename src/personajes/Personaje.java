@@ -1,6 +1,7 @@
 package personajes;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -80,7 +81,7 @@ public abstract class Personaje {
 	}
 	
 	public List<Hechizo> getHechizosParaLanzar() {
-	    return hechizosParaLanzar;
+	    return Collections.unmodifiableList(hechizosParaLanzar);
 	}
 
 	public void equiparObjeto(ObjetoMagico objetoMagico) {
@@ -92,7 +93,7 @@ public abstract class Personaje {
 	}
 
 	public List<ObjetoMagico> getObjetosMagicos() {
-		return objetosMagicos;
+		return Collections.unmodifiableList(objetosMagicos);
 	}
 
 	protected int aplicarObjetosAlDaño(Hechizo hechizo, int daño) {

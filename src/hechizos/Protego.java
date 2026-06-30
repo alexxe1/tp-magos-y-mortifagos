@@ -19,4 +19,9 @@ public class Protego extends HechizoBase {
 	public boolean esOfensivo() {
 		return false;
 	}
+
+	@Override
+	public boolean esOscuro() {
+		return false;
+	}
 }
