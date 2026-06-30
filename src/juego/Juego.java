@@ -11,13 +11,16 @@ import objetos.ObjetoMagico;
 import personajes.Personaje;
 
 public class Juego {
-	private static final int CANTIDAD_PERSONAJES_POR_BATALLON = 3;
-	private static final int RONDA_INICIAL = 1;
-	
+
 	private Batallon batallonMagos = new Batallon();
 	private Batallon batallonMortifagos = new Batallon();
     private Random rand = new Random();
-    private int ronda = RONDA_INICIAL;
+    private int ronda = 1;
+    private int cantidadPersonajes;
+    
+    public Juego(int cantidadPersonajes) {
+        this.cantidadPersonajes = cantidadPersonajes;
+    }
     
 	public void iniciarJuego() {
 		
@@ -40,7 +43,7 @@ public class Juego {
 	
 	private void crearBatallones() {
 		
-		for (int i = 0; i < CANTIDAD_PERSONAJES_POR_BATALLON; i++) {
+		for (int i = 0; i < cantidadPersonajes; i++) {
             batallonMagos.agregarPersonaje(Reclutador.crearMago());
             batallonMortifagos.agregarPersonaje(Reclutador.crearMortifago());
         }
@@ -115,19 +118,20 @@ public class Juego {
 	
 	private static void mostrarBatallon(Batallon batallon) {
         for (Personaje p : batallon.getPersonajes()) {
-            String objetos;
 
-            if (p.getObjetosMagicos().isEmpty()) {
-                objetos = "Ninguno";
-            } else {
-                objetos = p.getObjetosMagicos().stream()
-                    .map(ObjetoMagico::getNombre)
-                    .reduce((a, b) -> a + ", " + b)
-                    .orElse("Ninguno");
+            String objetos = "Ninguno";
+            
+            if (!p.getObjetosMagicos().isEmpty()) {
+            	
+                objetos = "";
+                
+                for (ObjetoMagico obj : p.getObjetosMagicos()) {
+                    if (!objetos.isEmpty()) objetos += ", ";
+                    objetos += obj.getNombre();
+                }
             }
 
-            System.out.println(
-                "  - " + p.getNombre()
+            System.out.println("  - " + p.getNombre()
                 + " | Vida: " + p.getPuntosDeVida()
                 + " | Magia: " + p.getNivelDeMagia()
                 + " | Objetos: " + objetos
@@ -137,6 +141,7 @@ public class Juego {
 
     private static void mostrarEstado(Batallon batallon) {
         for (Personaje p : batallon.getPersonajes()) {
+        	
             String estado = p.estaVivo() ? p.getPuntosDeVida() + " Puntos de Vida" : "Eliminado";
             System.out.println("    - " + p.getNombre() + ": " + estado);
         }
@@ -144,16 +149,19 @@ public class Juego {
 
     private static void mostrarHistorial(Batallon batallon) {
         Map<Personaje, List<Hechizo>> historial = batallon.getHistorialHechizos();
+        
         for (Map.Entry<Personaje, List<Hechizo>> entrada : historial.entrySet()) {
-            System.out.print("    - " + entrada.getKey().getNombre() + ": ");
-            if (entrada.getValue().isEmpty()) {
-                System.out.println("ninguno");
-            } else {
-                System.out.println(entrada.getValue().stream()
-                    .map(h -> h.getClass().getSimpleName())
-                    .reduce((a, b) -> a + ", " + b)
-                    .orElse("ninguno"));
-            }
+        	
+        	String hechizos = "";
+        	
+        	for (Hechizo h : entrada.getValue()) {
+        	    if (!hechizos.isEmpty()) hechizos += ", ";
+        	    hechizos += h.getClass().getSimpleName();
+        	}
+        	
+        	if (hechizos.isEmpty()) hechizos = "ninguno";
+        	
+        	System.out.println("    - " + entrada.getKey().getNombre() + ": " + hechizos);
         }
     }
 }

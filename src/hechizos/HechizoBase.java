@@ -1,6 +1,6 @@
 package hechizos;
 
-// El propósito de esta clase es evitar tener implementar "equals" y "hashCode" en cada hechizo nuevo
+// Dos hechizos del mismo tipo se consideran iguales
 public abstract class HechizoBase implements Hechizo {
 	
 	@Override

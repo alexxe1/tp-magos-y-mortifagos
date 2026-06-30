@@ -1,7 +1,6 @@
 package personajes;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -9,8 +8,7 @@ import hechizos.Hechizo;
 import objetos.ObjetoMagico;
 
 public abstract class Personaje {
-	private static final int PUNTOS_DE_VIDA_MINIMOS = 0;
-	
+
 	private String nombre;
 	private int nivelDeMagia;
 	private int puntosDeVida;
@@ -42,15 +40,15 @@ public abstract class Personaje {
 
 	public void herir(int puntosDeDaño) {
 		
-		// No puede ser atacado si está protegido
+		// No puede ser atacado si está protegido o puede esquivar
 		if (estaProtegido || esquivarAtaqueConObjeto()) {
 			return;
 		}
 		
 		puntosDeVida -= puntosDeDaño;
 		
-		if (puntosDeVida < PUNTOS_DE_VIDA_MINIMOS) {
-			puntosDeVida = PUNTOS_DE_VIDA_MINIMOS;
+		if (puntosDeVida < 0) {
+			puntosDeVida = 0;
 		}
 	}
 	
@@ -68,20 +66,14 @@ public abstract class Personaje {
 	}
 	
 	public Hechizo elegirHechizo() {
-		return elegirHechizoAleatorio();
-	}
-
-	public Hechizo elegirHechizoAleatorio() {
-
-		// Actualmente lanza un hechizo aleatorio pero se puede sofisticar
-		Random random = new Random();
-		int indiceRandom = random.nextInt(hechizosParaLanzar.size());
-		
-		return hechizosParaLanzar.get(indiceRandom);
+	    Random random = new Random();
+	    int indiceRandom = random.nextInt(hechizosParaLanzar.size());
+	    
+	    return hechizosParaLanzar.get(indiceRandom);
 	}
 	
 	public List<Hechizo> getHechizosParaLanzar() {
-	    return Collections.unmodifiableList(hechizosParaLanzar);
+	    return hechizosParaLanzar;
 	}
 
 	public void equiparObjeto(ObjetoMagico objetoMagico) {
@@ -93,7 +85,7 @@ public abstract class Personaje {
 	}
 
 	public List<ObjetoMagico> getObjetosMagicos() {
-		return Collections.unmodifiableList(objetosMagicos);
+	    return objetosMagicos;
 	}
 
 	protected int aplicarObjetosAlDaño(Hechizo hechizo, int daño) {
@@ -117,7 +109,7 @@ public abstract class Personaje {
 	}
 	
 	public boolean estaVivo() {
-		return puntosDeVida > PUNTOS_DE_VIDA_MINIMOS;
+		return puntosDeVida > 0;
 	}
 	
 	// Esta función sirve para cuando un batallón ya usó todos los hechizos y los personajes no tienen más

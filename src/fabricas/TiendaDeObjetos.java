@@ -27,9 +27,11 @@ public class TiendaDeObjetos {
 
         case AMULETO:
             return new AmuletoDeRecuperacion();
+            
+        default:
+            throw new IllegalArgumentException("Tipo inválido");
+            
         }
-
-        throw new IllegalArgumentException("Tipo inválido");
     }
 
     // Devuelve una lista con objetos mágicos aleatorios de 0 a
