@@ -32,7 +32,7 @@ public class Reclutador {
 	private static final int PUNTOS_VIDA_SEGUIDOR = 75;
 
 	private static Random random = new Random();
-
+  
 	private static List<String> nombresAuror = new ArrayList<>(
 			Arrays.asList("Kingsley", "Tonks", "Moody", "Dawlish", "Proudfoot"));
 	private static List<String> nombresProfesor = new ArrayList<>(
@@ -51,17 +51,17 @@ public class Reclutador {
 
 		switch (tipo) {
 
-		case TipoMago.AUROR:
+		case AUROR:
 			mago = new Auror(elegirNombre(nombresAuror, "Auror"), NIVEL_MAGIA_AUROR, PUNTOS_VIDA_AUROR,
 					hechizosDeMago());
 			break;
 
-		case TipoMago.PROFESOR:
+		case PROFESOR:
 			mago = new Profesor(elegirNombre(nombresProfesor, "Profesor"), NIVEL_MAGIA_PROFESOR, PUNTOS_VIDA_PROFESOR,
 					hechizosDeMago());
 			break;
 
-		case TipoMago.ESTUDIANTE:
+		case ESTUDIANTE:
 			mago = new Estudiante(elegirNombre(nombresEstudiante, "Estudiante"), NIVEL_MAGIA_ESTUDIANTE,
 					PUNTOS_VIDA_ESTUDIANTE, hechizosDeMago());
 			break;
@@ -86,12 +86,12 @@ public class Reclutador {
 
 		switch (tipo) {
 
-		case TipoMortifago.COMANDANTE:
+		case COMANDANTE:
 			mortifago = new Comandante(elegirNombre(nombresComandante, "Comandante"), NIVEL_MAGIA_COMANDANTE,
 					PUNTOS_VIDA_COMANDANTE, hechizosDeMortifago());
 			break;
 
-		case TipoMortifago.SEGUIDOR:
+		case SEGUIDOR:
 			mortifago = new Seguidor(elegirNombre(nombresSeguidor, "Seguidor"), NIVEL_MAGIA_SEGUIDOR, PUNTOS_VIDA_SEGUIDOR,
 					hechizosDeMortifago());
 			break;

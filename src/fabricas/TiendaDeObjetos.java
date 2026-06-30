@@ -12,43 +12,43 @@ import objetos.VaritaPotenciadora;
 
 public class TiendaDeObjetos {
 
-	private static Random random = new Random();
-	private static final int MAX_OBJETOS_ALEATORIOS = 3;
+    private static Random random = new Random();
+    private static final int MAX_OBJETOS_ALEATORIOS = 3;
 
-	public static ObjetoMagico crear(TipoObjeto tipo) {
+    public static ObjetoMagico crear(TipoObjeto tipo) {
 
-		switch (tipo) {
+        switch (tipo) {
 
-		case TipoObjeto.VARITA:
-			return new VaritaPotenciadora();
+        case VARITA:
+            return new VaritaPotenciadora();
 
-		case TipoObjeto.CAPA:
-			return new CapaDeInvisibilidad();
+        case CAPA:
+            return new CapaDeInvisibilidad();
 
-		case TipoObjeto.AMULETO:
-			return new AmuletoDeRecuperacion();
-		}
+        case AMULETO:
+            return new AmuletoDeRecuperacion();
+        }
 
-		throw new IllegalArgumentException("Tipo inválido");
-	}
+        throw new IllegalArgumentException("Tipo inválido");
+    }
 
-	// Devuelve una lista con objetos mágicos aleatorios de 0 a
-	// MAX_OBJETOS_ALEATORIOS
-	public static List<ObjetoMagico> generarObjetosAleatorios() {
+    // Devuelve una lista con objetos mágicos aleatorios de 0 a
+    // MAX_OBJETOS_ALEATORIOS
+    public static List<ObjetoMagico> generarObjetosAleatorios() {
 
-		int cantidad = random.nextInt(MAX_OBJETOS_ALEATORIOS + 1);
+        int cantidad = random.nextInt(MAX_OBJETOS_ALEATORIOS + 1);
 
-		List<ObjetoMagico> objetos = new ArrayList<>();
+        List<ObjetoMagico> objetos = new ArrayList<>();
 
-		TipoObjeto[] tipos = TipoObjeto.values();
+        TipoObjeto[] tipos = TipoObjeto.values();
 
-		for (int i = 0; i < cantidad; i++) {
+        for (int i = 0; i < cantidad; i++) {
 
-			TipoObjeto tipoAleatorio = tipos[random.nextInt(tipos.length)];
+            TipoObjeto tipoAleatorio = tipos[random.nextInt(tipos.length)];
 
-			objetos.add(TiendaDeObjetos.crear(tipoAleatorio));
-		}
+            objetos.add(TiendaDeObjetos.crear(tipoAleatorio));
+        }
 
-		return objetos;
-	}
+        return objetos;
+    }
 }
