@@ -18,7 +18,11 @@
 
 ## Diagrama de Clases
 
+Esta fue la primera iteración
 <img width="2150" height="1312" alt="diagrama" src="https://github.com/user-attachments/assets/063b0c00-fdae-4b54-b7cf-981e1379b738" />
+
+Este es el diagrama de clases FINAL
+<img width="2343" height="2346" alt="diagrama" src="https://github.com/user-attachments/assets/eaf66762-a6cb-4606-8661-7de8ae605949" />
 
 ---
 

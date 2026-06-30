@@ -7,6 +7,7 @@ import java.util.Random;
 import batalla.Batallon;
 import fabricas.Reclutador;
 import hechizos.Hechizo;
+import objetos.ObjetoMagico;
 import personajes.Personaje;
 
 public class Juego {
@@ -44,10 +45,10 @@ public class Juego {
             batallonMortifagos.agregarPersonaje(Reclutador.crearMortifago());
         }
 
-        System.out.println("⚡ Batallón de Magos:");
+        System.out.println("Batallón de Magos:");
         mostrarBatallon(batallonMagos);
 
-        System.out.println("\n💀 Batallón de Mortífagos:");
+        System.out.println("\nBatallón de Mortífagos:");
         mostrarBatallon(batallonMortifagos);
 	}
 	
@@ -58,31 +59,31 @@ public class Juego {
 	private void correrBuclePrincipal() {
 		while (batallonMagos.tienePersonajesSaludables() && batallonMortifagos.tienePersonajesSaludables()) {
 
-            System.out.println("🔔 RONDA " + ronda);
+            System.out.println("RONDA " + ronda);
             mostrarSeparador();
 
             if (rand.nextBoolean()) {
-                System.out.println("⚡ Turno de los MAGOS:");
+                System.out.println("Turno de los MAGOS:");
                 batallonMagos.atacar(batallonMortifagos);
 
                 if (batallonMortifagos.tienePersonajesSaludables()) {
-                    System.out.println("\n💀 Turno de los MORTÍFAGOS:");
+                    System.out.println("\nTurno de los MORTÍFAGOS:");
                     batallonMortifagos.atacar(batallonMagos);
                 }
             } else {
-                System.out.println("💀 Turno de los MORTÍFAGOS:");
+                System.out.println("Turno de los MORTÍFAGOS:");
                 batallonMortifagos.atacar(batallonMagos);
 
                 if (batallonMagos.tienePersonajesSaludables()) {
-                    System.out.println("\n⚡ Turno de los MAGOS:");
+                    System.out.println("\nTurno de los MAGOS:");
                     batallonMagos.atacar(batallonMortifagos);
                 }
             }
 
-            System.out.println("\n📊 Estado al final de la ronda:");
-            System.out.println("  Magos:");
+            System.out.println("\nEstado al final de la ronda:\n");
+            System.out.println("Magos:");
             mostrarEstado(batallonMagos);
-            System.out.println("  Mortífagos:");
+            System.out.println("Mortífagos:");
             mostrarEstado(batallonMortifagos);
 
             batallonMagos.limpiarEstadoRonda();
@@ -99,27 +100,44 @@ public class Juego {
         System.out.println("══════════════════════════════════════\n");
 
         if (batallonMagos.tienePersonajesSaludables()) {
-            System.out.println("🏆 ¡Los MAGOS han ganado la batalla!");
+            System.out.println("¡Los MAGOS han ganado la batalla!");
         } else {
-            System.out.println("🏆 ¡Los MORTÍFAGOS han ganado la batalla!");
+            System.out.println("¡Los MORTÍFAGOS han ganado la batalla!");
         }
 
-        System.out.println("\n📜 Historial de hechizos lanzados:");
-        System.out.println("  Magos:");
+        System.out.println("\nHistorial de hechizos lanzados:");
+        
+        System.out.println("Magos:");
         mostrarHistorial(batallonMagos);
-        System.out.println("  Mortífagos:");
+        System.out.println("Mortífagos:");
         mostrarHistorial(batallonMortifagos);
 	}
 	
 	private static void mostrarBatallon(Batallon batallon) {
         for (Personaje p : batallon.getPersonajes()) {
-            System.out.println("  - " + p.getNombre() + " | Magia: " + p.getNivelDeMagia() + " | Vida: " + p.getPuntosDeVida());
+            String objetos;
+
+            if (p.getObjetosMagicos().isEmpty()) {
+                objetos = "Ninguno";
+            } else {
+                objetos = p.getObjetosMagicos().stream()
+                    .map(ObjetoMagico::getNombre)
+                    .reduce((a, b) -> a + ", " + b)
+                    .orElse("Ninguno");
+            }
+
+            System.out.println(
+                "  - " + p.getNombre()
+                + " | Vida: " + p.getPuntosDeVida()
+                + " | Magia: " + p.getNivelDeMagia()
+                + " | Objetos: " + objetos
+            );
         }
     }
 
     private static void mostrarEstado(Batallon batallon) {
         for (Personaje p : batallon.getPersonajes()) {
-            String estado = p.estaVivo() ? "❤️  " + p.getPuntosDeVida() + " PV" : "💀 Eliminado";
+            String estado = p.estaVivo() ? p.getPuntosDeVida() + " Puntos de Vida" : "Eliminado";
             System.out.println("    - " + p.getNombre() + ": " + estado);
         }
     }
