@@ -1,44 +1,38 @@
 package fabricas;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 import hechizos.Hechizo;
 import hechizos.TipoHechizo;
+import objetos.ObjetoMagico;
 import personajes.magos.Auror;
 import personajes.magos.Estudiante;
 import personajes.magos.Mago;
 import personajes.magos.Profesor;
+import personajes.magos.TipoMago;
+import personajes.mortifagos.Comandante;
 import personajes.mortifagos.Mortifago;
+import personajes.mortifagos.Seguidor;
+import personajes.mortifagos.TipoMortifago;
 
 public class Reclutador {
-    private Random random = new Random();
 
-    public Mago crearMago() {
-        switch (random.nextInt(3)) {
-            case 0:
-                return new Auror("Auror", 8, 120, hechizosDeMago());
-            case 1:
-                return new Profesor("Profesor", 10, 110, hechizosDeMago());
-            default:
-                return new Estudiante("Estudiante", 4, 85, hechizosDeMago());
-        }
-    }
+	private static final int NIVEL_MAGIA_AUROR = 8;
+	private static final int PUNTOS_VIDA_AUROR = 120;
+	private static final int NIVEL_MAGIA_PROFESOR = 10;
+	private static final int PUNTOS_VIDA_PROFESOR = 110;
+	private static final int NIVEL_MAGIA_ESTUDIANTE = 4;
+	private static final int PUNTOS_VIDA_ESTUDIANTE = 85;
+	private static final int NIVEL_MAGIA_COMANDANTE = 10;
+	private static final int PUNTOS_VIDA_COMANDANTE = 120;
+	private static final int NIVEL_MAGIA_SEGUIDOR = 5;
+	private static final int PUNTOS_VIDA_SEGUIDOR = 75;
 
-    public Mortifago crearMortifago() {
-        return new Mortifago() {
-        };
-    }
-
-<<<<<<< Updated upstream
-    private List<Hechizo> hechizosDeMago() {
-        return List.of(
-                Hechiceria.crearHechizo(TipoHechizo.EXPELLIARMUS),
-                Hechiceria.crearHechizo(TipoHechizo.PROTEGO),
-                Hechiceria.crearHechizo(TipoHechizo.EXPECTO_PATRONUM));
-    }
-}
-=======
+	private static Random random = new Random();
+  
 	private static List<String> nombresAuror = new ArrayList<>(
 			Arrays.asList("Kingsley", "Tonks", "Moody", "Dawlish", "Proudfoot"));
 	private static List<String> nombresProfesor = new ArrayList<>(
@@ -136,4 +130,3 @@ public class Reclutador {
 		return nombres.remove(indice);
 	}
 }
->>>>>>> Stashed changes
