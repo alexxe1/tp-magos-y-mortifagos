@@ -121,7 +121,7 @@ public class Reclutador {
 
 	// Elige un nombre aleatorio de la lista según su clase o uno genérico si no hay
 	// más sin repetir
-	private static String elegirNombre(List<String> nombres, String nombreGenerico) {
+	public static String elegirNombre(List<String> nombres, String nombreGenerico) {
 		if (nombres.isEmpty())
 			return nombreGenerico;
 
