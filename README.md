@@ -22,7 +22,7 @@ Esta fue la primera iteración
 <img width="2150" height="1312" alt="diagrama" src="https://github.com/user-attachments/assets/063b0c00-fdae-4b54-b7cf-981e1379b738" />
 
 Este es el diagrama de clases FINAL
-<img width="2343" height="2389" alt="diagrama_final" src="https://github.com/user-attachments/assets/cb4f37f6-6012-45f3-ad54-83511a2e6067" />
+<img width="2348" height="2389" alt="diagrama_final" src="https://github.com/user-attachments/assets/bf733a0c-50a3-467a-9820-afa949f7423b" />
 
 ---
 
