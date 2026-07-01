@@ -33,6 +33,7 @@ Este es el diagrama de clases FINAL
 | **Factory** | `Reclutador` centraliza la creación de personajes a partir de `TipoMago` y `TipoMortifago`. `Hechiceria` centraliza la creación de hechizos a partir de `TipoHechizo`. `TiendaDeObjetos` centraliza la creación de objetos a partir de `TipoObjeto` |
 | **Strategy** | `Hechizo` es una interfaz con distintas implementaciones intercambiables (`Expelliarmus`, `AvadaKedavra`, `Protego`, `ExpectoPatronum`). |
 | **Template Method** | `calcularDaño` y `calcularCuracion` son abstractos en `Personaje` e implementados de forma distinta en `Mago` y `Mortifago`, sin que el hechizo conozca el tipo del lanzador. |
+| **Decorator** | Los objetos mágicos envuelven el comportamiento del personaje y modifican daño o curación sin tocar la clase base. `VaritaPotenciadora`, `CapaDeInvisibilidad` y `AmuletoDeRecuperacion` son decoradores que se pueden equipar y quitar en tiempo de ejecución |
 
 > [!NOTE]
 Los enum (`TipoObjeto`, `TipoMago`, `TipoMortifago` y `TipoHechizo`) tienen como único propósito facilitar la instanciación de los objetos. Una vez creados, el comportamiento de la aplicación depende exclusivamente del polimorfismo y no de los valores de estos enum.
